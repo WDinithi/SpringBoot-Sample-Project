@@ -5,6 +5,8 @@ import com.example.springbootpractice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/v/user")
 @CrossOrigin
@@ -12,24 +14,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/getUser")
-    public String getUser(){
-        return "Dinithi";
+    @GetMapping("/getUsers")
+    public List<UserDto> getUser(){
+        return userService.getAllUser();
     }
 
-    @PostMapping("/getUserPost")
+    @PostMapping("/getUserSave")
     public UserDto saveUser(@RequestBody UserDto userDto){
         return userService.saveUser(userDto);
     }
 
 
-    @PutMapping("/getUserPut")
-    public String getPut(){
-        return "Dinithi2";
+    @PutMapping("/getUserUpdate")
+    public UserDto updateUser(@RequestBody UserDto userDto){
+        return userService.updateUser(userDto);
     }
 
-    @DeleteMapping("/getUserPut")
-    public String getDelete(){
-        return "Dinithi3";
+    @DeleteMapping("/getUserDelete")
+    public boolean deleteUser(@RequestBody UserDto userDto){
+        return userService.deleteUser(userDto);
     }
 }
